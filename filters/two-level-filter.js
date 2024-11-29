@@ -1,4 +1,5 @@
 const twoLevelFilter = {
+  widget: $("#" + w.general.renderTo),
     createList: function (listData, chainMeasure) {
       return Array.from(new Set(listData.map((item) => item[0]))).map((item) => {
         let currentId = chainMeasure.concat(item); 
