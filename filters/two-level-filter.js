@@ -1,5 +1,5 @@
 const twoLevelFilter = {
-  widget: $("#" + w.general.renderTo),
+   widget: $("#" + w.general.renderTo),
     createList: function (listData, chainMeasure) {
       return Array.from(new Set(listData.map((item) => item[0]))).map((item) => {
         let currentId = chainMeasure.concat(item); 
@@ -180,19 +180,19 @@ const twoLevelFilter = {
       twoLevelFilter.addTextInput(twoLevelFilter.getSelectValues());
     },
     removeInitialList: function () {
-      widget.css({
+      twoLevelFilter.widget.css({
         opacity: "0%",
       });
   
       setTimeout(() => {
-        widget.css({
+        twoLevelFilter.widget.css({
           opacity: "100%",
         });
       }, 1000);
     },
     createElements: function () {
       const headerContainer = widgetId.find(".va-widget-header-container");
-      const treeviewSearch = widget.find(".dx-treeview-search");
+      const treeviewSearch = twoLevelFilter.widget.find(".dx-treeview-search");
       headerContainer.css({ "background-color": "transparent" });
   
       twoLevelFilter.removeItems();
@@ -238,10 +238,10 @@ const twoLevelFilter = {
         ">Исключить</label>";
   
       headerContainer.after(search);
-      widget.before(filterTag);
+      twoLevelFilter.widget.before(filterTag);
       treeviewSearch.after(selectionButtons);
       treeviewSearch.after(filterExclude);
-      widget.after(actionsButtons);
+      twoLevelFilter.widget.after(actionsButtons);
   
       widgetId.find(".dx-texteditor-input")[0].setAttribute("placeholder", "Поиск...");
   
@@ -371,7 +371,7 @@ const twoLevelFilter = {
       widgetId.find(".dx-icon-search").remove();
     },
     createButtons: function () {
-      const treeviewSearch = widget.find(".dx-treeview-search");
+      const treeviewSearch = twoLevelFilter.widget.find(".dx-treeview-search");
       const selectionButtons = document.createElement("div");
       selectionButtons.className = "filter-selection-buttons";
       selectionButtons.innerHTML = `<div 
@@ -419,7 +419,7 @@ const twoLevelFilter = {
       });
     },
     applyCssStyle: function () {
-      widget.css({
+      twoLevelFilter.widget.css({
         background: "white",
         display: "block",
       });

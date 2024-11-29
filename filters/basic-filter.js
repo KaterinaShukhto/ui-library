@@ -4,19 +4,19 @@ const basicFilter = {
     $(".checkbox-color").remove();
 
     // Изменить шрифт вложеных значений
-    widget.find(".rb-filter-search").attr("style", "font-size: 18px");
-    widget.find(".rb-filter-list-item-text").attr("style", "font-size: 18px");
-    widget.find(".rb-filter-exclude-container").attr("style", "font-size: 18px");
+    basicFilter.widget.find(".rb-filter-search").attr("style", "font-size: 18px");
+    basicFilter.widget.find(".rb-filter-list-item-text").attr("style", "font-size: 18px");
+    basicFilter.widget.find(".rb-filter-exclude-container").attr("style", "font-size: 18px");
 
     // изменить стрелку выпадающего меню
-    widget.find(".rb-filter-header-arrow").css({ color: "#0033FF" });
+    basicFilter.widget.find(".rb-filter-header-arrow").css({ color: "#0033FF" });
     // Изменить крестик выпадающего меню
-    widget.find(".rb-filter-header-close").css({ color: "#0033FF" });
+    basicFilter.widget.find(".rb-filter-header-close").css({ color: "#0033FF" });
 
-    widget.find(".rb-filter-header-arrow").css({ color: "#0033FF" });
+    basicFilter.widget.find(".rb-filter-header-arrow").css({ color: "#0033FF" });
 
     // Высота выпадающего списка
-    widget.find(".rb-filter-body-container .rb-filter-list-container > ul").css({
+    basicFilter.widget.find(".rb-filter-body-container .rb-filter-list-container > ul").css({
       height: "auto",
       "max-height": height ? height + "px" : "500px",
     });
@@ -30,12 +30,12 @@ const basicFilter = {
       cssStyles.left = "-55%";
     }
 
-    widget.find(".rb-filter-body-container").css(cssStyles);
+    basicFilter.widget.find(".rb-filter-body-container").css(cssStyles);
 
     // Изменяем цвет контура фильтра
-    widget.find(".rb-filter-header-container").css({ border: "1px solid #C4CDD6" });
+    basicFilter.widget.find(".rb-filter-header-container").css({ border: "1px solid #C4CDD6" });
     // Изменяем скругление контура фильтра
-    widget.find(".rb-filter-header-container").css({ "border-radius": "10px" });
+    basicFilter.widget.find(".rb-filter-header-container").css({ "border-radius": "10px" });
 
     // замена цвета чекбоксов на всех фильтрах
     const checkboxChecked = document.createElement("style");
@@ -46,23 +46,23 @@ const basicFilter = {
 
   setupSelectionButtons: function () {
     if (w.data.data.length > 4) {
-      $("#widget-" + w.general.renderTo)
+      $("#basicFilter.widget-" + w.general.renderTo)
         .find(".rb-filter-select-all-button")
         .eq(0)
         .css("margin-right", "25px")
         .text("Выбрать все");
-      $("#widget-" + w.general.renderTo)
+      $("#basicFilter.widget-" + w.general.renderTo)
         .find(".rb-filter-unselect-all-button")
         .eq(0)
         .text("Сбросить все");
-      widget.find(".rb-filter-selection-buttons-container").css({
+      basicFilter.widget.find(".rb-filter-selection-buttons-container").css({
         display: "flex",
         "justify-content": "flex-start",
         "margin-left": "5px",
       });
     } else {
       // скрыть кнопки 'Выбрать отображаемое' и  'снять выделение'
-      $("#widget-" + w.general.renderTo)
+      $("#basicFilter.widget-" + w.general.renderTo)
         .find(".rb-filter-selection-buttons-container")
         .css({ display: "none" });
     }
@@ -72,7 +72,7 @@ const basicFilter = {
     const observer = new MutationObserver(function (mutations) {
       const value = visApi().getSelectedValues(w.general.renderTo).length;
       if (value > 1) {
-        widget.find(".rb-filter-header-text")[0].textContent = "Выбрано: " + value;
+        basicFilter.widget.find(".rb-filter-header-text")[0].textContent = "Выбрано: " + value;
       }
     });
 
@@ -81,14 +81,14 @@ const basicFilter = {
       subtree: true,
     };
 
-    observer.observe(widget.find(".rb-filter-header-text")[0], options);
+    observer.observe(basicFilter.widget.find(".rb-filter-header-text")[0], options);
   },
 
   initializeFilterSearch: function () {
     let searchString;
-    widget.find(".rb-filter-search").on("input", function (e) {
+    basicFilter.widget.find(".rb-filter-search").on("input", function (e) {
       searchString = e.target.value;
-      if (e.target.value.length > 0 && widget.find(".dx-texteditor-buttons-container").length === 0) {
+      if (e.target.value.length > 0 && basicFilter.widget.find(".dx-texteditor-buttons-container").length === 0) {
         const element = document.createElement("div");
         element.style.cssText = `
               position: absolute;
@@ -98,19 +98,19 @@ const basicFilter = {
         element.className = "dx-texteditor-buttons-container";
         element.innerHTML =
           '<span class="dx-clear-button-area" style="color: #999; cursor: pointer;"><span class="dx-icon dx-icon-clear" style="font-size: 18px"></span></span>';
-        widget.find(".rb-filter-search").after(element);
+        basicFilter.widget.find(".rb-filter-search").after(element);
         $(element).on("click", function () {
           searchString = "";
-          widget.find(".rb-filter-search").val("");
-          widget.find(".rb-filter-search").trigger("input");
-          widget.find(".dx-texteditor-buttons-container").remove();
+          basicFilter.widget.find(".rb-filter-search").val("");
+          basicFilter.widget.find(".rb-filter-search").trigger("input");
+          basicFilter.widget.find(".dx-texteditor-buttons-container").remove();
         });
       } else if (e.target.value.length === 0) {
-        widget.find(".dx-texteditor-buttons-container").remove();
+        basicFilter.widget.find(".dx-texteditor-buttons-container").remove();
       }
     });
 
-    widget
+    basicFilter.widget
       .find(".rb-filter-search")
       .on("focus", function (e) {
         $(this).css("outline", "none").css("border", "0.6px solid rgba(21, 136, 230, .7)");
@@ -119,20 +119,20 @@ const basicFilter = {
         $(this).css("border", "1px solid #f1f1f1");
       });
 
-    widget.find(".rb-filter-header-close").on("click", function () {
+    basicFilter.widget.find(".rb-filter-header-close").on("click", function () {
       searchString = "";
-      widget.find(".rb-filter-search").val("");
-      widget.find(".dx-texteditor-buttons-container").remove();
+      basicFilter.widget.find(".rb-filter-search").val("");
+      basicFilter.widget.find(".dx-texteditor-buttons-container").remove();
     });
 
-    widget.find(".rb-filter-cancel-button").on("click", function (e) {
-      widget.find(".rb-filter-search").val(searchString);
+    basicFilter.widget.find(".rb-filter-cancel-button").on("click", function (e) {
+      basicFilter.widget.find(".rb-filter-search").val(searchString);
     });
 
     visApi().onFilterIsOpenChangedListener(
       { guid: w.general.renderTo, widgetGuid: w.general.renderTo },
       function (data) {
-        widget.find(".rb-filter-search").val(searchString);
+        basicFilter.widget.find(".rb-filter-search").val(searchString);
       }
     );
   },
@@ -141,7 +141,7 @@ const basicFilter = {
     const currentYear = new Date().getFullYear().toString();
     const previousYear = (new Date().getFullYear() - 1).toString();
 
-    visApi().onWidgetLoadedListener(
+    visApi().onbasicFilter.widgetLoadedListener(
       { guid: w.general.renderTo + "485515", widgetGuid: w.general.renderTo },
       function () {
         const dateInfo = JSON.parse(localStorage.getItem("dateInfo")) || {};
